@@ -7,6 +7,6 @@ var repository = [
   { name: 'gloom', height: 1, types: ['grass', 'poison'] },
   { name: 'hitmonlee', height: 2, types: ['fighting'] },
   { name: 'combee', height: 1, types: ['bug', 'flying'] },
-  { name: 'tornadus', height: 2, types: 'flying' },
-  { name: 'sawk', height: 2, types: 'fighting' }
+  { name: 'tornadus', height: 2, types: ['flying'] },
+  { name: 'sawk', height: 2, types: ['fighting'] }
 ];
