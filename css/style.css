@@ -1,3 +1,7 @@
+:root {
+  --primary-color: #404040;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -7,6 +11,7 @@ body {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.6;
+  color: var(--primary-color);
 }
 
 .page-header {
