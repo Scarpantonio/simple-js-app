@@ -13,18 +13,30 @@ var repository = [
 
 for (let i = 0; i < repository.length; i++) {
   let pokemon = repository[i];
-  document.write(
-    pokemon.name +
-      ' ' +
-      '(' +
-      'height:' +
-      ' ' +
-      pokemon.height +
-      ')' +
-      '<br>' +
-      '<br>'
-  );
   if (pokemon.height > 5) {
-    document.write("Wow, that's big!");
+    document.write(
+      pokemon.name +
+        ' ' +
+        '(' +
+        'height:' +
+        ' ' +
+        pokemon.height +
+        ')' +
+        ' -' +
+        ' ' +
+        "Wow, that's big!"
+    );
+  } else {
+    document.write(
+      pokemon.name +
+        ' ' +
+        '(' +
+        'height:' +
+        ' ' +
+        pokemon.height +
+        ')' +
+        '<br>' +
+        '<br>'
+    );
   }
 }
