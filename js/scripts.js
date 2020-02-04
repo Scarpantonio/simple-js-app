@@ -11,19 +11,17 @@ var repository = [
   { name: 'Onix', height: 8.8, types: ['rock', 'ground'] }
 ];
 
-for (let i = 0; i < repository.length; i++) {
-  let pokemon = repository[i];
+repository.forEach(function(pokemon) {
   if (pokemon.height > 5) {
     document.write(
       pokemon.name +
         ' ' +
         '(' +
-        'height:' +
+        'height' +
         ' ' +
         pokemon.height +
         ')' +
         ' -' +
-        ' ' +
         "Wow, that's big!"
     );
   } else {
@@ -31,7 +29,7 @@ for (let i = 0; i < repository.length; i++) {
       pokemon.name +
         ' ' +
         '(' +
-        'height:' +
+        'height' +
         ' ' +
         pokemon.height +
         ')' +
@@ -39,4 +37,34 @@ for (let i = 0; i < repository.length; i++) {
         '<br>'
     );
   }
-}
+});
+
+// for (let i = 0; i < repository.length; i++) {
+//   let pokemon = repository[i];
+//   if (pokemon.height > 5) {
+//     document.write(
+//       pokemon.name +
+//         ' ' +
+//         '(' +
+//         'height:' +
+//         ' ' +
+//         pokemon.height +
+//         ')' +
+//         ' -' +
+//         ' ' +
+//         "Wow, that's big!"
+//     );
+//   } else {
+//     document.write(
+//       pokemon.name +
+//         ' ' +
+//         '(' +
+//         'height:' +
+//         ' ' +
+//         pokemon.height +
+//         ')' +
+//         '<br>' +
+//         '<br>'
+//     );
+//   }
+// }
