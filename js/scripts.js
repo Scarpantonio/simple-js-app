@@ -1,17 +1,31 @@
-var repository = [
-  { name: 'Bulbasaur', height: 0.7, types: ['grass', 'fire'] },
-  { name: 'Cloyster', height: 1.5, types: ['ice', 'water'] },
-  { name: 'Charmander', height: 0.6, types: ['fire'] },
-  { name: 'Beedrill', height: 1, types: ['bug', 'poison'] },
-  { name: 'Gloom', height: 0.8, types: ['grass', 'poison'] },
-  { name: 'Gitmonlee', height: 1.5, types: ['fighting'] },
-  { name: 'Combee', height: 0.3, types: ['bug', 'flying'] },
-  { name: 'Tornadus', height: 1.5, types: ['flying'] },
-  { name: 'Sawk', height: 1.4, types: ['fighting'] },
-  { name: 'Onix', height: 8.8, types: ['rock', 'ground'] }
-];
+var pokemonRepository = (function() {
+  var repository = [
+    { name: 'Bulbasaur', height: 0.7, types: ['grass', 'fire'] },
+    { name: 'Cloyster', height: 1.5, types: ['ice', 'water'] },
+    { name: 'Tornadus', height: 1.5, types: ['flying'] },
+    { name: 'Sawk', height: 1.4, types: ['fighting'] },
+    { name: 'Onix', height: 8.8, types: ['rock', 'ground'] }
+  ];
 
-repository.forEach(function(pokemon) {
+  function getAll() {
+    return repository;
+  }
+
+  function add(pokemon) {
+    repository.push(pokemon);
+  }
+
+  return {
+    add: add,
+    getAll: getAll
+  };
+})();
+
+console.log(pokemonRepository.getAll());
+pokemonRepository.add({ name: 'Tornadus', height: 1.5, types: ['flying'] });
+console.log(pokemonRepository.getAll());
+
+pokemonRepository.getAll().forEach(function(pokemon) {
   if (pokemon.height > 5) {
     document.write(
       pokemon.name +
@@ -21,8 +35,10 @@ repository.forEach(function(pokemon) {
         ' ' +
         pokemon.height +
         ')' +
-        ' -' +
-        "Wow, that's big!"
+        ' - ' +
+        "Wow, that's big!" +
+        '<br>' +
+        '<br>'
     );
   } else {
     document.write(
