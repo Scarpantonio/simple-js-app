@@ -22,7 +22,10 @@ var pokemonRepository = (function() {
 })();
 
 console.log(pokemonRepository.getAll());
-pokemonRepository.add({ name: 'Tornadus', height: 1.5, types: ['flying'] });
+
+var newPokemon = { name: 'Tornadus', height: 1.5, types: ['flying'] };
+pokemonRepository.add(newPokemon);
+
 console.log(pokemonRepository.getAll());
 
 pokemonRepository.getAll().forEach(function(pokemon) {
