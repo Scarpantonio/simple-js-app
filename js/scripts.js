@@ -17,45 +17,37 @@ var pokemonRepository = (function() {
 
   return {
     add: add,
-    getAll: getAll
+    getAll: getAll,
+    addListItem: addListItem
   };
+
+  function addListItem(pokemon = {}) {
+    var pokemonList = document.querySelector('.pokemon-list');
+    var $listItem = document.createElement('li');
+    var button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('my-class');
+    $listItem.appendChild(button);
+    pokemonList.appendChild($listItem);
+    button.addEventListener('click', function(event) {
+      showDetails(pokemon);
+    });
+  }
+
+  function showDetails(pokemon) {
+    console.log(pokemon);
+  }
 })();
 
 console.log(pokemonRepository.getAll());
 
-var newPokemon = { name: 'Tornadus', height: 1.5, types: ['flying'] };
+var newPokemon = { name: 'Charmander', height: 0.6, types: ['fire'] };
 pokemonRepository.add(newPokemon);
 
 console.log(pokemonRepository.getAll());
 
 pokemonRepository.getAll().forEach(function(pokemon) {
-  if (pokemon.height > 5) {
-    document.write(
-      pokemon.name +
-        ' ' +
-        '(' +
-        'height' +
-        ' ' +
-        pokemon.height +
-        ')' +
-        ' - ' +
-        "Wow, that's big!" +
-        '<br>' +
-        '<br>'
-    );
-  } else {
-    document.write(
-      pokemon.name +
-        ' ' +
-        '(' +
-        'height' +
-        ' ' +
-        pokemon.height +
-        ')' +
-        '<br>' +
-        '<br>'
-    );
-  }
+  pokemonRepository.addListItem(pokemon);
 });
 
 // for (let i = 0; i < repository.length; i++) {
