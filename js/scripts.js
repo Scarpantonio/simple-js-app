@@ -75,6 +75,7 @@ var pokemonRepository = (function() {
         }
 
         item.weight = details.weight;
+        return item;
       })
       .catch(function(e) {
         console.error(e);

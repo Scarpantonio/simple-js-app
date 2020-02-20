@@ -61,7 +61,7 @@ h1 {
   font-size: 20px;
   border: none;
   border-radius: 5px;
-  /* width: 150px; */
+  box-shadow: 5px 5px 3px grey;
   width: 200px;
   height: 200px;
   letter-spacing: 1px;
@@ -146,3 +146,22 @@ h1 {
 .modal-close:hover {
   background-color: #627aad;
 }
+
+/* @media all and (max-width: 500px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media all and (min-width: 500px) and (max-width: 750px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media all and (max-width: 750px) {
+  .grid {
+    grid-gap: 10px;
+  }
+  .grid__item:last-child {
+    grid-column: auto / auto;
+    grid-row: auto / auto;
+  } */
