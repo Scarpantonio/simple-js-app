@@ -11,14 +11,15 @@ var pokemonRepository = (function() {
   }
 
   function addListItem(pokemon) {
-    var pokemonList = document.querySelector('.pokemon-list');
-    var $listItem = document.createElement('li');
-    var button = document.createElement('button');
-    button.innerText = pokemon.name;
-    button.classList.add('my-class');
-    $listItem.appendChild(button);
-    pokemonList.appendChild($listItem);
-    button.addEventListener('click', function(event) {
+    var $pokemonList = $('.pokemon-list');
+    var $listItem = $('<li>');
+    // var button = document.createElement('button');
+    // button.innerText = pokemon.name;
+    // button.classList.add('my-class');
+    var $button = $('<button class="my-class">' + pokemon.name + '</button>');
+    $listItem.append($button);
+    $pokemonList.append($listItem);
+    $button.on('click', function(event) {
       showDetails(pokemon);
     });
   }
@@ -31,10 +32,7 @@ var pokemonRepository = (function() {
   }
 
   function loadList() {
-    return fetch(apiUrl)
-      .then(function(response) {
-        return response.json();
-      })
+    return $.ajax(apiUrl)
       .then(function(json) {
         json.results.forEach(function(item) {
           var pokemon = {
@@ -52,10 +50,7 @@ var pokemonRepository = (function() {
 
   function loadDetails(item) {
     var url = item.detailsUrl;
-    return fetch(url)
-      .then(function(response) {
-        return response.json();
-      })
+    return $.ajax(url)
       .then(function(details) {
         // Now we add the details to the item
         item.imageUrl = details.sprites.front_default;
@@ -83,66 +78,52 @@ var pokemonRepository = (function() {
   }
   // Show modal content
   function showModal(item) {
-    var $modalContainer = document.querySelector('#modal-container');
-    // Clear existing modal content
-    $modalContainer.innerHTML = '';
-    // Creating div element in DOM
-    var modal = document.createElement('div');
-    // adding class to div DOM element
-    modal.classList.add('modal');
-    // create closing button in modal content
-    var closeButtonElement = document.createElement('button');
-    closeButtonElement.classList.add('modal-close');
-    closeButtonElement.innerText = 'Close';
-    // Add event listener to close modal when botton is clicked
-    closeButtonElement.addEventListener('click', hideModal);
-    // Create element for name in modal content
-    var nameElement = document.createElement('h1');
-    nameElement.innerText = item.name;
-    // Create img in modal content
-    var imageElement = document.createElement('img');
-    imageElement.classList.add('modal-img');
-    imageElement.setAttribute('src', item.imageUrl);
-    // Create element for height in modal content
-    var heightElement = document.createElement('p');
-    heightElement.innerText = 'height : ' + item.height + 'm';
-    // create element for weight in modal content
-    var weightElement = document.createElement('p');
-    weightElement.innerText = 'weight : ' + item.weight + 'kg';
-    // Create element for type in modal content
-    var typesElement = document.createElement('p');
-    typesElement.innerText = 'types : ' + item.types;
-    // Create element for abilities in modal content
-    var abilitiesElement = document.createElement('p');
-    abilitiesElement.innerText = 'abilities : ' + item.abilities;
-
+    var $modalContainer = $('#modal-container');
+    //clear existing content of the model
+    $modalContainer.empty();
+    //creating div element in DOM
+    //adding class to div DOM element
+    var modal = $('<div class="modal"></div>');
+    //creating closing button in modal content
+    var closeButtonElement = $('<button class="modal-close">Close</button>');
+    // adding event listener to close modal when clicked on button
+    closeButtonElement.on('click', hideModal);
+    //creating element for name in modal content
+    var nameElement = $('<h1>' + item.name + '</h1>');
+    // creating img in modal content
+    var imageElement = $('<img class="modal-img">');
+    imageElement.attr('src', item.imageUrl);
+    //creating element for height in modal content
+    var heightElement = $('<p>' + 'height : ' + item.height + 'm' + '</p>');
+    //creating element for weight in modal content
+    var weightElement = $('<p>' + 'weight : ' + item.weight + 'kg' + '</p>');
+    //creating element for type in modal content
+    var typesElement = $('<p>' + 'types : ' + item.types + '</p>');
+    //creating element for abilities in modal content
+    var abilitiesElement = $('<p>' + 'abilities : ' + item.abilities + '</p>');
     // Append modal content to webpage
-    modal.appendChild(closeButtonElement);
-    modal.appendChild(nameElement);
-    modal.appendChild(imageElement);
-    modal.appendChild(heightElement);
-    modal.appendChild(weightElement);
-    modal.appendChild(typesElement);
-    modal.appendChild(abilitiesElement);
-    $modalContainer.appendChild(modal);
-
+    modal.append(closeButtonElement);
+    modal.append(nameElement);
+    modal.append(imageElement);
+    modal.append(heightElement);
+    modal.append(weightElement);
+    modal.append(typesElement);
+    modal.append(abilitiesElement);
+    $modalContainer.append(modal);
     // Add class to show modal
-    $modalContainer.classList.add('is-visible');
+    $modalContainer.addClass('is-visible');
   }
 
   // hides modal when close button is clicked
   function hideModal() {
-    var $modalContainer = document.querySelector('#modal-container');
-    $modalContainer.classList.remove('is-visible');
+    var $modalContainer = $('#modal-container');
+    $modalContainer.removeClass('is-visible');
   }
 
   // Hides model when ESC is clicked
-  window.addEventListener('keydown', e => {
-    var $modalContainer = document.querySelector('#modal-container');
-    if (
-      e.key === 'Escape' &&
-      $modalContainer.classList.contains('is-visible')
-    ) {
+  jQuery(window).on('keydown', e => {
+    var $modalContainer = $('#modal-container');
+    if (e.key === 'Escape' && $modalContainer.hasClass('is-visible')) {
       hideModal();
     }
   });
